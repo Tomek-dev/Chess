@@ -133,15 +133,15 @@ abstract public class Chess extends JButton {
                 board.getPanel(row,column).setOccupied(true);
                 lastchess.row = row;
                 lastchess.column = column;
-                /*if(lastchess instanceof Pawn)
+                if(lastchess instanceof Pawn)
                 {
                     if(lastchess.row == 0 || lastchess.row == 7)
                         ((Pawn) lastchess).Change();
                     else
                         board.getPanel(row,column).add(lastchess);
                 }
-                else*/
-                board.getPanel(row,column).add(lastchess);
+                else
+                    board.getPanel(row,column).add(lastchess);
                 lastchess.clicked = false;
                 lastchess.setIcon(lastchess.icon);
             }
@@ -194,7 +194,15 @@ abstract public class Chess extends JButton {
                 board.getPanel(row, column).repaint();
                 row=sourcepick.getRow();
                 column=sourcepick.getColumn();
-                board.getPanel(row,column).add(source);
+                if(source instanceof Pawn)
+                {
+                    if(row == 0 || row == 7)
+                        ((Pawn) source).Change();
+                    else
+                        board.getPanel(row,column).add(source);
+                }
+                else
+                    board.getPanel(row,column).add(source);
                 board.getPanel(row,column).setOccupied(true);
                 clicked = false;
                 setIcon(icon);
