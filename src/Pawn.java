@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Chess {
-    private boolean first = true;
     private int direction;
     private ImageIcon buttonqueen;
     private ImageIcon buttonbishop;
@@ -206,13 +205,11 @@ public class Pawn extends Chess {
         List<Pick> list = new ArrayList<>();
         if(row+direction>=0&&row+direction<=7&&!board.getPanel(row+direction,column).isOccupied())
         {
-            if (first) {
-                list.add(new Pick(board.getPanel(row + direction, column)));
-                if (!board.getPanel(row + (2 * direction), column).isOccupied())
-                    list.add(new Pick(board.getPanel(row + (2 * direction), column)));
-            } else {
-                list.add(new Pick(board.getPanel(row + direction, column)));
-            }
+            list.add(new Pick(board.getPanel(row + direction, column)));
+            if(color && row == 1&&!board.getPanel(row + (2 * direction), column).isOccupied())
+                list.add(new Pick(board.getPanel(row + (2 * direction), column)));
+            else if(!color && row == 6&&!board.getPanel(row + (2 * direction), column).isOccupied())
+                list.add(new Pick(board.getPanel(row + (2 * direction), column)));
         }
         return list;
     }
